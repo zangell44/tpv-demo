@@ -15,7 +15,7 @@ async def input_flow():
         if input_str == "q":
             break
         else:
-            result = eval(input_str)
+            result = eval(input_str, globals(), locals())
             logger.info(result)
 
 
