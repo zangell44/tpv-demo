@@ -1,0 +1,34 @@
+# Welcome to your prefect.yaml file! You can you this file for storing and managing
+# configuration for deploying your flows. We recommend committing this file to source
+# control along with your flow code.
+
+# Generic metadata about this project
+name: tpv-demo
+prefect-version: 2.11.3+9.g16f46ca49
+
+# build section allows you to manage and build docker images
+build:
+
+# push section allows you to manage if and how this project is uploaded to remote locations
+push:
+
+# pull section allows you to provide instructions for cloning this project in remote locations
+pull:
+- prefect.deployments.steps.git_clone:
+    repository: https://github.com/zangell44/tpv-demo.git
+    branch: main
+
+# the deployments section allows you to provide configuration for deploying flows
+deployments:
+- name: default
+  version:
+  tags: []
+  description: "A flow that saves the United States from a zombie apocalypse by\n
+    uploading an artifact to Prefect Cloud."
+  entrypoint: save_us.py:save_us
+  parameters: {}
+  work_pool:
+    name: eks-work-pool
+    work_queue_name:
+    job_variables: {}
+  schedule:
